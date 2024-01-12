@@ -41,12 +41,18 @@ CREATE TABLE "dept_manager" (
 
 CREATE TABLE "dept_emp" (
     "emp_no" integer   NOT NULL,
-    "dept_no" varchar(10)   NOT NULL
+    "dept_no" varchar(10)   NOT NULL,
+	CONSTRAINT "pk_dept_emp" PRIMARY KEY (
+        "emp_no", "dept_no"
+    )
 );
 
 CREATE TABLE "salaries" (
     "emp_no" integer   NOT NULL,
-    "salary" integer   NOT NULL
+    "salary" integer   NOT NULL,
+	CONSTRAINT "pk_salaries" PRIMARY KEY (
+        "emp_no", "salary"
+    )
 );
 
 ALTER TABLE "employees" ADD CONSTRAINT "fk_employees_emp_title_id" FOREIGN KEY("emp_title_id")
