@@ -13,11 +13,11 @@ CREATE TABLE "titles" (
 CREATE TABLE "employees" (
     "emp_no" integer   NOT NULL,
     "emp_title_id" varchar(10)   NOT NULL,
-    "birth_date" datetime   NOT NULL,
+    "birth_date" date   NOT NULL,
     "first_name" varchar   NOT NULL,
     "last_name" varchar   NOT NULL,
     "sex" varchar(10)   NOT NULL,
-    "hire_date" datetime   NOT NULL,
+    "hire_date" date   NOT NULL,
     CONSTRAINT "pk_employees" PRIMARY KEY (
         "emp_no"
      )
@@ -33,23 +33,20 @@ CREATE TABLE "departments" (
 
 CREATE TABLE "dept_manager" (
     "dept_no" varchar(10)   NOT NULL,
-    "emp_no" integer   NOT NULL
+    "emp_no" integer   NOT NULL,
+	CONSTRAINT "pk_dept_manager" PRIMARY KEY (
+        "dept_no", "emp_no"
+    )
 );
 
 CREATE TABLE "dept_emp" (
     "emp_no" integer   NOT NULL,
-    "dept_no" varchar(10)   NOT NULL,
-    CONSTRAINT "pk_dept_emp" PRIMARY KEY (
-        "emp_no"
-     )
+    "dept_no" varchar(10)   NOT NULL
 );
 
 CREATE TABLE "salaries" (
     "emp_no" integer   NOT NULL,
-    "salary" integer   NOT NULL,
-    CONSTRAINT "pk_salaries" PRIMARY KEY (
-        "emp_no"
-     )
+    "salary" integer   NOT NULL
 );
 
 ALTER TABLE "employees" ADD CONSTRAINT "fk_employees_emp_title_id" FOREIGN KEY("emp_title_id")
@@ -70,3 +67,12 @@ REFERENCES "departments" ("dept_no");
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
 
+-- Import CSV files into tables
+-- Read the data
+
+Select * from employees limit 15
+Select * from departments limit 15
+Select * from dept_emp limit 15
+Select * from dept_manager limit 15
+Select * from salaries limit 15
+Select * from titles limit 15
